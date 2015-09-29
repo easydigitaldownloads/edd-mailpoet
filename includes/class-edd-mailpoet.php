@@ -58,6 +58,12 @@ class EDD_MailPoet extends EDD_Newsletter {
 				'type' => 'header'
 			),
 			array(
+				'id'      => 'edd_wysija_show_checkout_signup',
+				'name'    => __( 'Show Signup on Checkout', 'edd_wysija' ),
+				'desc'    => __( 'Allow customers to signup for the list selected below during checkout?', 'edd_wysija' ),
+				'type'    => 'checkbox'
+			),
+			array(
 				'id' => 'edd_wysija_list',
 				'name' => __('Choose a list', 'edd_wysija'),
 				'desc' => __('Select the list you wish to subscribe buyers to', 'edd_wysija'),
@@ -70,12 +76,6 @@ class EDD_MailPoet extends EDD_Newsletter {
 				'desc' => __('This is the text shown next to the signup option', 'edd_wysija'),
 				'type' => 'text',
 				'size' => 'regular'
-			),
-			array(
-				'id'      => 'edd_wysija_show_checkout_signup',
-				'name'    => __( 'Show Signup on Checkout', 'edd_wysija' ),
-				'desc'    => __( 'Allow customers to signup for the list selected below during checkout?', 'edd_wysija' ),
-				'type'    => 'checkbox'
 			),
 		);
 
