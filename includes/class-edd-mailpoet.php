@@ -122,7 +122,12 @@ class EDD_MailPoet extends EDD_Newsletter {
 		);
 
 		$userHelper = WYSIJA::get( 'user','helper' );
-		$userHelper->addSubscriber( $data );
+		$model_user = WYSIJA::get( 'user', 'model' );
+		$subscriber_exists_already = $model_user->getOne( false, array('email' => trim($data['user']['email'] ) ) );
+
+		if ( ! $subscriber_exists_already ) {
+			$userHelper->addSubscriber( $data );
+		}
 
 		if( $userHelper ) {
 			return true;
