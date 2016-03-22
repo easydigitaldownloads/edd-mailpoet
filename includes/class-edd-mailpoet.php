@@ -23,7 +23,7 @@ class EDD_MailPoet extends EDD_Newsletter {
 	}
 
 	/**
-	 * Retrieves the lists from Mail Chimp
+	 * Retrieves the lists from MailPoet
 	 */
 	public function get_lists() {
 
@@ -117,15 +117,18 @@ class EDD_MailPoet extends EDD_Newsletter {
 		);
 
 		$data = array(
-			'user'=> $user_data,
-			'user_list' => array( 'list_ids' => array( $list_id ) )
+			'user'      => $user_data,
+			'user_list' => array( 'list_ids' => array( $list_id ) ),
 		);
 
-		$userHelper = WYSIJA::get( 'user','helper' );
-		$model_user = WYSIJA::get( 'user', 'model' );
-		$subscriber_exists_already = $model_user->getOne( false, array('email' => trim($data['user']['email'] ) ) );
+		$userHelper      = WYSIJA::get( 'user','helper' );
+		$model_user_list = WYSIJA::get( 'user_list', 'model' );
 
-		if ( ! $subscriber_exists_already ) {
+		$user        = get_user_by( 'email', $user_data['email'] );
+		$lists       = $model_user_list->get_lists( array( $user->ID ) );
+		$users_lists = isset( $lists[ $user->ID ] ) ? $lists[ $user->ID ] : array();
+
+		if ( ! in_array( $list_id, $users_lists ) ) {
 			$userHelper->addSubscriber( $data );
 		}
 
