@@ -153,6 +153,18 @@ class EDD_Newsletter {
 	 * Check if a customer needs to be subscribed on completed purchase of specific products
 	 */
 	public function completed_download_purchase_signup( $download_id = 0, $payment_id = 0, $download_type = 'default' ) {
+		global $mp_processed_download_ids;
+
+		if ( ! is_array( $mp_processed_download_ids ) ) {
+			$mp_processed_download_ids = array();
+		}
+
+		if ( in_array( $download_id, $mp_processed_download_ids ) ) {
+			return false;
+		}
+
+		$mp_processed_download_ids[] = $download_id;
+
 
 		$user_info = edd_get_payment_meta_user_info( $payment_id );
 		$lists     = get_post_meta( $download_id, '_edd_' . $this->id, true );
@@ -165,9 +177,12 @@ class EDD_Newsletter {
 			if( $downloads ) {
 				foreach( $downloads as $d_id ) {
 					$d_lists = get_post_meta( $d_id, '_edd_' . $this->id, true );
+
 					if ( is_array( $d_lists ) ) {
 						$lists = array_merge( $d_lists, (array) $lists );
 					}
+
+					$mp_processed_download_ids[] = $d_id;
 				}
 			}
 		}
