@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Easy Digital Downloads Wysija\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-01 19:07+0100\n"
-"PO-Revision-Date: 2013-01-01 19:53+0100\n"
-"Last-Translator: FxB <fx@fxbenard.com>\n"
+"POT-Creation-Date: 2016-04-01 12:11+0200\n"
+"PO-Revision-Date: 2016-04-01 12:12+0200\n"
+"Last-Translator: FX Bénard <fx@fxbenard.com>\n"
 "Language-Team: FxB <fx@fxbenard.com>\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
@@ -14,64 +14,81 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;esc_attr__;esc_attr_e;esc_html__;esc_html_e;_n;"
 "_x;_n:1,2;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_x:1,2c\n"
-"X-Poedit-Basepath: ../\n"
+"X-Poedit-Basepath: ..\n"
 "X-Textdomain-Support: yes\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: edd-wysija.php:19
-msgid "Easy Digital Downloads - Wysija"
-msgstr "Easy Digital Downloads - Wysija"
+#: edd-mailpoet.php:19
+msgid "Easy Digital Downloads - MailPoet"
+msgstr "Easy Digital Downloads - MailPoet"
 
-#: edd-wysija.php:20
+#: edd-mailpoet.php:20
 msgid ""
-"Include a Wysija signup option with your Easy Digital Downloads checkout"
+"Include a MailPoet signup option with your Easy Digital Downloads checkout"
 msgstr ""
-"Inclure une option d'inscription à Wysija dans votre panier d'Easy Digital "
-"Downloads"
+"Inclure une option d’inscription à MailPoet dans Easy Digital Downloads au "
+"moment de la commande"
 
-#: edd-wysija.php:21
+#: edd-mailpoet.php:21
 msgid "Pippin Williamson"
 msgstr "Pippin Williamson"
 
-#: edd-wysija.php:22
+#: edd-mailpoet.php:22
 msgid "http://easydigitaldownloads.com/extension/wysija/"
 msgstr "http://easydigitaldownloads.com/extension/wysija/"
 
-#: edd-wysija.php:75
-msgid "Wysija Settings"
-msgstr "Réglages Wysija "
+#: includes/class-edd-mailpoet.php:20
+msgid "Signup for the newsletter"
+msgstr "S’inscrire à la newsletter"
 
-#: edd-wysija.php:76
-msgid "Configure Wysija Integration Settings"
-msgstr "Configurer les réglages d&#8217;intégration de Wysija"
+#: includes/class-edd-mailpoet.php:56
+msgid "MailPoet Settings"
+msgstr "Réglages de MailPoet"
 
-#: edd-wysija.php:81
-msgid "License Key"
-msgstr "Clef de license"
+#: includes/class-edd-mailpoet.php:57
+msgid "Configure MailPoet Integration Settings"
+msgstr "Configurer les réglages d’intégration de MailPoet"
 
-#: edd-wysija.php:82
-msgid "Enter your license for EDD Wysija to receive automatic upgrades"
+#: includes/class-edd-mailpoet.php:62
+msgid "Show Signup on Checkout"
+msgstr "Afficher l’inscription sur la commande"
+
+#: includes/class-edd-mailpoet.php:63
+msgid "Allow customers to signup for the list selected below during checkout?"
 msgstr ""
-"Entrez votre clé de licence pour EDD Wysija pour recevoir automatiquement "
-"les mises à jour"
+"Permettre aux clients de s’inscrire à la liste sélectionnée ci-dessus lors "
+"de votre commande ?"
 
-#: edd-wysija.php:88
+#: includes/class-edd-mailpoet.php:68
 msgid "Choose a list"
 msgstr "Choisir une liste"
 
-#: edd-wysija.php:89
+#: includes/class-edd-mailpoet.php:69
 msgid "Select the list you wish to subscribe buyers to"
 msgstr "Sélectionnez la liste à laquelle vous souhaitez abonner vos acheteurs"
 
-#: edd-wysija.php:95
+#: includes/class-edd-mailpoet.php:75
 msgid "Checkout Label"
 msgstr "Libellé"
 
-#: edd-wysija.php:96
+#: includes/class-edd-mailpoet.php:76
 msgid "This is the text shown next to the signup option"
 msgstr "C'est le texte affiché à côté de l'option d'inscription"
 
-#: edd-wysija.php:166
-msgid "Sign up for our mailing list"
-msgstr "Inscrivez-vous à notre liste d'envoi"
+#: includes/class-edd-newsletter.php:219
+msgid "Select the lists you wish buyers to be subscribed to when purchasing."
+msgstr ""
+"Sélectionner les listes auxquelles vous souhaitez abonner vos acheteurs "
+"pendant l’achat."
+
+#~ msgid "License Key"
+#~ msgstr "Clef de license"
+
+#~ msgid "Enter your license for EDD Wysija to receive automatic upgrades"
+#~ msgstr ""
+#~ "Entrez votre clé de licence pour EDD Wysija pour recevoir automatiquement "
+#~ "les mises à jour"
+
+#~ msgid "Sign up for our mailing list"
+#~ msgstr "Inscrivez-vous à notre liste d'envoi"
