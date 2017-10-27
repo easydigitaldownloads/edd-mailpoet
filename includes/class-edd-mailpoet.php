@@ -20,6 +20,8 @@ class EDD_MailPoet extends EDD_Newsletter {
 			$this->checkout_label = __( 'Signup for the newsletter', 'edd_wysija' );
 		}
 
+		add_filter( 'edd_settings_sections_extensions', array( $this, 'subsection' ), 10, 1 );
+
 	}
 
 	/**
@@ -43,6 +45,18 @@ class EDD_MailPoet extends EDD_Newsletter {
 			}
 		}
 		return (array) $this->lists;
+	}
+
+	/**
+	 * Register our subsection for EDD 2.5
+	 *
+	 * @since  2.5.6
+	 * @param  array $sections The subsections
+	 * @return array           The subsections with MailChimp added
+	 */
+	public function subsection( $sections ) {
+		$sections['mailpoet'] = __( 'MailPoet', 'edd_wysija' );
+		return $sections;
 	}
 
 	/**
@@ -78,6 +92,10 @@ class EDD_MailPoet extends EDD_Newsletter {
 				'size' => 'regular'
 			),
 		);
+
+		if ( version_compare( EDD_VERSION, 2.5, '>=' ) ) {
+			$mailpoet_settings = array( 'mailpoet' => $mailpoet_settings );
+		}
 
 		return array_merge( $settings, $mailpoet_settings );
 	}
