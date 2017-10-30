@@ -41,7 +41,12 @@ if( ! class_exists( 'EDD_MailPoet' ) ) {
 	include( dirname( __FILE__ ) . '/includes/class-edd-mailpoet.php' );
 }
 
-$edd_mp = new EDD_MailPoet( 'mailpoet', 'MailPoet' );
+function edd_mailpoet_load() {
+
+	$edd_mp = new EDD_MailPoet( 'mailpoet', 'MailPoet' );
+}
+add_action( 'plugins_loaded', 'edd_mailpoet_load' );
+
 
 /*
 |--------------------------------------------------------------------------
