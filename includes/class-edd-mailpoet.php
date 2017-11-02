@@ -9,11 +9,18 @@
 
 class EDD_MailPoet extends EDD_Newsletter {
 
+	private $is_v3 = false;
+
 	/**
 	 * Sets up the checkout label
 	 */
 	public function init() {
 		global $edd_options;
+
+		if( defined( 'MAILPOET_VERSION' ) && version_compare( MAILPOET_VERSION, '3.0', '>=' ) ) {
+			$this->is_v3 = true;
+		}
+
 		if( ! empty( $edd_options['edd_wysija_label'] ) ) {
 			$this->checkout_label = trim( $edd_options['edd_wysija_label'] );
 		} else {
@@ -31,19 +38,36 @@ class EDD_MailPoet extends EDD_Newsletter {
 
 		global $edd_options;
 
-		if( ! class_exists( 'WYSIJA' ) ) {
-			return array();
-		}
+		if( $this->is_v3 ) {
 
-		$modelList   = WYSIJA::get( 'list','model' );
-		$wysijaLists = $modelList->get( array( 'name', 'list_id' ), array( 'is_enabled' => 1 ) );
+			$lists = \MailPoet\API\API::MP('v1')->getLists();
 
-		if( ! empty( $wysijaLists ) ) {
-			foreach( $wysijaLists as $list ) {
+			foreach( $lists as $list ) {
 
-				$this->lists[ $list['list_id'] ] = $list['name'];
+				$this->lists[ $list['id'] ] = $list['name'];
 			}
+
+
+		} else {
+
+			if( ! class_exists( 'WYSIJA' ) ) {
+
+				return array();
+
+			}
+
+			$modelList   = WYSIJA::get( 'list','model' );
+			$wysijaLists = $modelList->get( array( 'name', 'list_id' ), array( 'is_enabled' => 1 ) );
+
+			if( ! empty( $wysijaLists ) ) {
+				foreach( $wysijaLists as $list ) {
+
+					$this->lists[ $list['list_id'] ] = $list['name'];
+				}
+			}
+
 		}
+
 		return (array) $this->lists;
 	}
 
@@ -116,42 +140,88 @@ class EDD_MailPoet extends EDD_Newsletter {
 
 		global $edd_options;
 
-		if( ! class_exists( 'WYSIJA' ) ) {
-			return false;
-		}
-
 		// Retrieve the global list ID if none is provided
 		if( ! $list_id ) {
+
 			$list_id = ! empty( $edd_options['edd_wysija_list'] ) ? $edd_options['edd_wysija_list'] : false;
+
 			if( ! $list_id ) {
 				return false;
 			}
+
 		}
 
-		$user_data = array(
-			'email'     => $user_info['email'],
-			'firstname' => $user_info['first_name'],
-			'lastname'  => $user_info['last_name'],
-		);
+		if( $this->is_v3 ) {
 
-		$data = array(
-			'user'      => $user_data,
-			'user_list' => array( 'list_ids' => array( $list_id ) ),
-		);
+			try {
 
-		$userHelper      = WYSIJA::get( 'user','helper' );
-		$model_user_list = WYSIJA::get( 'user_list', 'model' );
+				$user_data = array(
+					'email'      => $user_info['email'],
+					'first_name' => $user_info['first_name'],
+					'last_name'  => $user_info['last_name'],
+				);
 
-		$user        = get_user_by( 'email', $user_data['email'] );
-		$lists       = $model_user_list->get_lists( array( $user->ID ) );
-		$users_lists = isset( $lists[ $user->ID ] ) ? $lists[ $user->ID ] : array();
+				$lists   = array();
+				$lists[] = $list_id;
 
-		if ( ! in_array( $list_id, $users_lists ) ) {
-			$userHelper->addSubscriber( $data );
-		}
+				$subscriber = \MailPoet\API\API::MP('v1')->addSubscriber( $user_data, $lists );
 
-		if( $userHelper ) {
-			return true;
+				return true;
+
+			} catch( Exception $exception ) {
+
+				$message = $exception->getMessage();
+
+				if( false !== strpos( $message, 'This subscriber already exists' ) ) {
+
+					// Subscriber already exists, we just need to subscribe them to the list
+
+					try {
+
+						$subscriber = \MailPoet\API\API::MP('v1')->subscribeToList( $user_info['email'], $list_id );
+
+						return true;
+
+					} catch( Exception $exception ) {
+						// echo $exception->getMessage();
+					}
+				}
+
+				return false;
+			}
+
+		} else {
+
+			if( ! class_exists( 'WYSIJA' ) ) {
+				return false;
+			}
+
+			$user_data = array(
+				'email'     => $user_info['email'],
+				'firstname' => $user_info['first_name'],
+				'lastname'  => $user_info['last_name'],
+			);
+
+			$data = array(
+				'user'      => $user_data,
+				'user_list' => array( 'list_ids' => array( $list_id ) ),
+			);
+
+			$userHelper      = WYSIJA::get( 'user','helper' );
+			$model_user_list = WYSIJA::get( 'user_list', 'model' );
+
+			$user        = get_user_by( 'email', $user_data['email'] );
+			$lists       = $model_user_list->get_lists( array( $user->ID ) );
+			$users_lists = isset( $lists[ $user->ID ] ) ? $lists[ $user->ID ] : array();
+
+			if ( ! in_array( $list_id, $users_lists ) ) {
+				$userHelper->addSubscriber( $data );
+			}
+
+			if( $userHelper ) {
+				return true;
+			}
+
 		}
 
 		return false;
