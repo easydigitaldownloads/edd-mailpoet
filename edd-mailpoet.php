@@ -3,7 +3,7 @@
 Plugin Name: Easy Digital Downloads - MailPoet (formerly Wysija)
 Plugin URL: http://easydigitaldownloads.com/extensions/wysija
 Description: Add customers to your newsletter lists in MailPoet
-Version: 1.4
+Version: 1.4.1
 Author: Easy Digital Downloads, LLC
 Author URI: https://easydigitaldownloads.com
 Contributors: mordauk
@@ -30,7 +30,7 @@ define( 'EDD_MAILPOET_PATH', dirname( __FILE__ ) );
 |--------------------------------------------------------------------------
 */
 if( class_exists( 'EDD_License' ) && is_admin() ) {
-	$eddw_license = new EDD_License( __FILE__, 'Wysija', '1.4', 'EDD Team', 'edd_wysija_license_key' );
+	$eddw_license = new EDD_License( __FILE__, 'Wysija', '1.4.1', 'EDD Team', 'edd_wysija_license_key' );
 }
 
 if( ! class_exists( 'EDD_Newsletter' ) ) {
