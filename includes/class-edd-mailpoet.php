@@ -96,17 +96,23 @@ class EDD_MailPoet extends EDD_Newsletter {
 				'type' => 'header'
 			),
 			array(
-				'id'      => 'edd_wysija_show_checkout_signup',
-				'name'    => __( 'Show Signup on Checkout', 'edd_wysija' ),
-				'desc'    => __( 'Allow customers to signup for the list selected below during checkout?', 'edd_wysija' ),
-				'type'    => 'checkbox'
-			),
-			array(
 				'id' => 'edd_wysija_list',
 				'name' => __('Choose a list', 'edd_wysija'),
 				'desc' => __('Select the list you wish to subscribe buyers to', 'edd_wysija'),
 				'type' => 'select',
 				'options' => $this->get_lists()
+			),
+			array(
+			    'id'      => 'edd_wysija_show_checkout_signup',
+				'name'    => __( 'Show Signup on Checkout', 'edd_wysija' ),
+				'desc'    => __( 'Allow customers to signup for the list selected below during checkout?', 'edd_wysija' ),
+				'type'    => 'checkbox'
+			),
+			array(
+				'id'      => 'edd_wysija_checkout_signup_default_value',
+				'name'    => __( 'Signup Checked by default', 'edd_wysija' ),
+				'desc'    => __( 'Should the newsletter signup checkbox shown during checkout be checked by default?', 'edd_wysija' ),
+				'type'    => 'checkbox'
 			),
 			array(
 				'id' => 'edd_wysija_label',
