@@ -1,15 +1,15 @@
 <?php
-/*
-Plugin Name: Easy Digital Downloads - MailPoet (formerly Wysija)
-Plugin URL: http://easydigitaldownloads.com/extensions/wysija
-Description: Add customers to your newsletter lists in MailPoet
-Version: 1.4.1
-Author: Easy Digital Downloads, LLC
-Author URI: https://easydigitaldownloads.com
-Contributors: mordauk
-Text Domain: edd_wysija
-Domain Path: languages
-*/
+/**
+ * Plugin Name: Easy Digital Downloads - MailPoet (formerly Wysija)
+ * Plugin URL: http://easydigitaldownloads.com/extensions/wysija
+ * Description: Add customers to your newsletter lists in MailPoet
+ * Version: 1.4.1
+ * Author: Sandhills Development, LLC
+ * Author URI: https://sandhillsdev.com/
+ * Contributors: mordauk
+ * Text Domain: edd_wysija
+ * Domain Path: languages
+ */
 
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) exit;
