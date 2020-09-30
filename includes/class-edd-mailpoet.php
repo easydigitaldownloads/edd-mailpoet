@@ -1,5 +1,4 @@
 <?php
-
 /**
  * EDD Mail Chimp class, extension of the EDD base newsletter classs
  *
