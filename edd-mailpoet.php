@@ -30,7 +30,7 @@ define( 'EDD_MAILPOET_PATH', dirname( __FILE__ ) );
 |--------------------------------------------------------------------------
 */
 if( class_exists( 'EDD_License' ) && is_admin() ) {
-	$eddw_license = new EDD_License( __FILE__, 'Wysija', '1.4.1', 'Sandhills Development, LLC', 'edd_wysija_license_key' );
+	$eddw_license = new EDD_License( __FILE__, 'MailPoet', '1.4.1', 'Sandhills Development, LLC', 'edd_wysija_license_key', null, 18200 );
 }
 
 if( ! class_exists( 'EDD_Newsletter' ) ) {
