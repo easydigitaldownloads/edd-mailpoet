@@ -176,9 +176,7 @@ class EDD_MailPoet extends EDD_Newsletter {
 
 			} catch( Exception $exception ) {
 
-				$message = $exception->getMessage();
-
-				if( false !== strpos( $message, 'This subscriber already exists' ) ) {
+				if( $exception->getCode() === \MailPoet\API\MP\v1\APIException::SUBSCRIBER_EXISTS ) {
 
 					// Subscriber already exists, we just need to subscribe them to the list
 
